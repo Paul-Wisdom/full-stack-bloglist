@@ -58,24 +58,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-  # notify_discord:
-  #   needs: [simple_deployment_pipeline]
-  #   runs-on: ubuntu-latest
-  #   if: ${{always()}}
-  #   steps:
-  #     - name: title
-  #       run: echo ${{env.DEPLOYMENT_CONDITION}}
-  #     - name: Discord Success Notification
-  #       uses: hunghg255/action-notifications@master
-  #       if: ${{needs.simple_deployment_pipeline.result == 'success' && env.DEPLOYMENT_CONDITION == 'true'}}
-  #       with:
-  #         discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
-  #         title: New build deployed
-  #         description: Test at https://full-stack-bloglist.onrender.com
-  #     - name: Discord Failure Notification
-  #       uses: hunghg255/action-notifications@master
-  #       if: ${{ needs.simple_deployment_pipeline.result != 'success' && env.DEPLOYMENT_CONDITION == 'true'}}
-  #       with:
-  #         discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
-  #         title: New build deployement
-  #         status: failure
+  notify_discord:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    if: ${{always()}}
+    steps:
+      - name: title
+        run: echo ${{env.DEPLOYMENT_CONDITION}}
+      - name: Discord Success Notification
+        uses: hunghg255/action-notifications@master
+        if: ${{needs.simple_deployment_pipeline.result == 'success' && env.DEPLOYMENT_CONDITION == 'true'}}
+        with:
+          discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: New build deployed
+          description: Test at https://full-stack-bloglist.onrender.com
+      - name: Discord Failure Notification
+        uses: hunghg255/action-notifications@master
+        if: ${{ needs.simple_deployment_pipeline.result != 'success' && env.DEPLOYMENT_CONDITION == 'true'}}
+        with:
+          discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: New build deployement
+          status: failure
