@@ -9,15 +9,8 @@ on:
 
 env:
   DEPLOYMENT_CONDITION: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}
-  # TEST_MONGO_URL: ${{ secrets.TEST_MONGO_URL }}
   JWT_SCR_KEY: ${{secrets.JWT_SECRET}}
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: test
-        run: echo "works"
-
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
     services:
