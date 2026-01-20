@@ -10,6 +10,7 @@ on:
 env:
   DEPLOYMENT_CONDITION: ${{ github.event_name == 'push' && !contains(toJSON(github.event.commits.*.message), '#skip') }}
   JWT_SCR_KEY: ${{secrets.JWT_SECRET}}
+  
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest

@@ -16,7 +16,6 @@ describe("creating new users", () => {
         const response = await api.post('/api/users').send(helper.userWithoutUserName);
         const usersAtEnd = await helper.usersInDB();
 
-
         expect(response.status).toBe(400);
         expect(usersAtEnd.length).toBe(usersAtStart.length);
     });
